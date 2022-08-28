@@ -1,0 +1,21 @@
+<head>
+  <meta charset="utf-8">
+    <meta name="description" content="{{ site.description }}">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>{{ title }} | Art 140: Web Design</title>
+          {% if page.desc %}
+            <meta name="description" content="{{ page.desc }}"/>
+          {% else %}
+            <meta name="description" content="Art 140"/>
+          {% endif %}
+          <meta name="keywords" content=""/>
+          <meta property="og:title" content="Art 140 Web Design at Harrisburg Area Community College"/>
+          <meta property="og:type" content="article"/>
+          <meta property="og:url" content="https://richhauck.com/art140"/>
+          <meta property="og:description" content="">
+            <meta property="og:site_name" content=""/>
+            <meta property="og:image" content=""/>
+            <link rel="stylesheet" href="{{ "/style.css" | url }}?v={% version %}"/>
+            <link rel="shortcut icon" href="{{ "/favicon.png" | url }}">
+              <link rel="apple-touch-icon" href="{{ "/apple-touch-icon.png" | url }}"></head>
