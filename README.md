@@ -1,8 +1,9 @@
-# Art 114: Interactive Media and Design Class Site
+# Art 140: Web Design Class Site
 
-This is the class syllabus site and resources for Art 114 at Harrisburg Area Community College. 
+This is the class syllabus site and resources for Art 140 at Harrisburg Area Community College.
 
 ## Installation
+
 ```
 npm install
 ```
@@ -10,18 +11,19 @@ npm install
 ## Usage
 
 ### Development environment:
+
 ```
 npm run start
 ```
 
 ### Build:
+
 ```
 npm run build
 ```
 
-
 ## Tools Used
 
-- [Eleventy](https://www.11ty.dev/) 
+- [Eleventy](https://www.11ty.dev/)
 - [TailwindCSS](https://tailwindcss.com/)
 - [PostCSS](https://postcss.org/)
