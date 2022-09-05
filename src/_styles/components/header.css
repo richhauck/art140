@@ -48,7 +48,7 @@
           color: #fff;
         }
         span{
-          color: #CD6060;
+          color: var(--lightRed);
         }
       }
       p{

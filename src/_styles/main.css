@@ -1,5 +1,6 @@
 @import 'globals.css';
-@import 'vs.css';
+/* @import 'vs.css'; */
+@import 'prism-vsc-dark-plus.css';
 @import 'tailwind.css';
 @import './components/hamburger.css';
 @import './components/header.css';
