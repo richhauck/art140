@@ -47,9 +47,10 @@
 
 .button{
 	color: #fff;
-	&:link, &:visited{background-color: bgcolor;}
+	&:link, &:visited{background-color: var(--red);}
 	&:hover{background-color: var(--blue);}
 	padding: 0.3em 0.7em;
+	border-radius: 4px;
 }
 
 aside{

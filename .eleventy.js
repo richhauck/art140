@@ -25,7 +25,7 @@ module.exports = function (eleventyConfig) {
 		},
 		templateFormats: ["html", "md", "njk"],
 		htmlTemplateEngine: "njk",
-    pathPrefix: "/art114/"
+    pathPrefix: "/art140/"
 	};
 
 }

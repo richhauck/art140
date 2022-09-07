@@ -20,6 +20,7 @@
     }
   }
   #primary-header{
+    z-index: 100;
     color: #fff;
     padding: 1.8em 2em 2em 2em;
     width: 100%;

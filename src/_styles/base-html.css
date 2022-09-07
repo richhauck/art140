@@ -28,8 +28,7 @@ h2{
 h3{
 	color: var(--bgcolor);
 	font-size: 1.3em;
-	font-weight: bold;
-	text-transform: uppercase;
+	font-weight: normal;
 }
 h1, h2, h3{
 	margin-top: 1em;

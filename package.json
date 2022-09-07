@@ -1,7 +1,7 @@
 {
-  "name": "art114",
+  "name": "art140",
   "version": "1.0.0",
-  "description": "Syllabus Site for Art 114: Interactive Media and Design, HACC",
+  "description": "Syllabus Site for Art 140: Web Design, HACC",
   "scripts": {
     "start": "eleventy --serve & postcss src/_styles/main.css -o dist/style.css --watch",
     "build": "ELEVENTY_PRODUCTION=true eleventy & NODE_ENV=production postcss src/_styles/main.css -o dist/style.min.css"
