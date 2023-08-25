@@ -3,6 +3,7 @@ title: Working with Images
 layout: default.njk
 ---
 <h2>Files Formats</h2>
+<p>Below are different image file formats compatible with a browser. Under most circumstances, I recommend saving images out as WebP, which is the most modern format.</p>
 <table>
   <tr>
     <th>Format</th>
@@ -10,19 +11,19 @@ layout: default.njk
   </tr>
   <tr>
     <td>JPG</td>
-    <td>Joint Photographic Experts Group: used for optimizing photographs</td>
+    <td><strong>Joint Photographic Experts Group</strong>: used for optimizing photographs (Tip: Remember "P" stands for photographic)</td>
   </tr>
   <tr>
     <td>PNG</td>
-    <td>Portable Network Graphics. Replacement for GIF. Supports transparency.</td>
+    <td><strong>Portable Network Graphics</strong>. Replacement for GIF. Supports transparency. Works well for flat colors. Can be used for Photographs, but yields a larger file size than JPG</td>
   </tr>
   <tr>
     <td>GIF</td>
-    <td>Graphics Interchange Format. Raster file format. 8 bits per pixel and can contain 256 indexed colors--supports animation</td>
+    <td><strong>Graphics Interchange Format</strong>. Raster file format. 8 bits per pixel and can contain 256 indexed colors--supports animation. Unless animating, PNG is a superior format.</td>
   </tr>
   <tr>
     <td>SVG</td>
-    <td>Scalable Vector Graphics. XML markup. Can be embedded inline or referenced as the src of an image tag.</td>
+    <td><strong>Scalable Vector Graphics</strong>. XML markup. Can be embedded inline or referenced as the src of an image tag.</td>
   </tr>
   <tr>
     <td>WebP</td>
@@ -88,6 +89,20 @@ layout: default.njk
     {% endhighlight %}
   
     <p><a class="button" href="{{"/lessons/working-with-images/background-image/" | url }}" target="_blank">See Example</a></p>
+  </section>
+
+  <section>
+    <h2>100% Scale Background Image</h2>
+    <p>This yields a background image that always fits within the browser.</p>
+    <p><b>In CSS:</b></p>
+    {% highlight "css" %}
+    html{
+    background: url(images/your-image.webp) no-repeat center center fixed;
+    background-size: cover;
+  }
+    {% endhighlight %}
+  
+    <p><a class="button" href="{{"/lessons/working-with-images/background-100/" | url }}" target="_blank">See Example</a></p>
   </section>
   
   <aside>
