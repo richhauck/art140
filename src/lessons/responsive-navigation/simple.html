@@ -20,19 +20,19 @@
       }
       #primary-nav {
         background-color: lightblue;
-        li {
-          list-style: none;
-          display: inline-block;
-        }
+      }
+      #primary-nav li {
+        list-style: none;
+        display: inline-block;
       }
       @media (max-width: 767px) {
         #primary-nav {
           display: grid;
           grid-template-rows: 0fr;
           transition: grid-template-rows 0.5s ease-out;
-          li {
-            display: block;
-          }
+        }
+        #primary-nav li {
+          display: block;
         }
         body.nav-open #primary-nav {
           grid-template-rows: 1fr;
