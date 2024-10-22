@@ -8,37 +8,45 @@ title: Responsive Navigation
     <p>At its core, we are creating a CSS breakpoint, but adding a rule at the bottom that overrides the max-height property of #primary-nav:</p>
     {% highlight "css" %}
     /* This media query defines how the page displays beneath a breakpoint */
-    @media (max-width: 767px){
-      #toggle-nav{
-        display: block; /* display button beneath breakpoint */
+    @media (max-width: 767px) {
+      #primary-nav {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.5s ease-out;
       }
-      #primary-nav{
-        max-height: 0;
-      }
-      #primary-nav li{
+      #primary-nav li {
         display: block;
       }
-      /* Here, we override the rule when the body has a class of nav-open */
-      body.nav-open #primary-nav{
-        max-height: 400px;
+      body.nav-open #primary-nav {
+        grid-template-rows: 1fr;
       }
-    }{% endhighlight %}
+      .inner {
+        overflow: hidden;
+      }
+      #toggle-nav {
+        display: block; /* display button beneath breakpoint */
+      }
+    }
+    {% endhighlight %}
 
     <p>The JavaScript used is pretty simple, but very powerful in how our page displays. Basically, we dynamically change the class attribute on a HTML element and let CSS handle the styling from there.</p>
     {% highlight "js" %}
     // Perform this after the window has loaded
-    window.onload = function() {
+    window.onload = () => {
       // First, tell JavaScript to remember which DOM element (in this case, a button) to reference (by id)
-      let toggleNav = document.getElementById('toggle-nav');
+      const toggleNav = document.getElementById('toggle-nav');
+      toggleNav.innerHTML = '&#9776;';
 
       // Tell button to do something on click
-      toggleNav.addEventListener('click', function(){
-
+      toggleNav.addEventListener('click', () => {
         // toggle the body's class attribute
         document.body.classList.toggle('nav-open');
-
+        toggleNav.innerHTML = document.body.classList.contains('nav-open')
+          ? '&#x2715'
+          : '&#9776;';
       });
-    };{% endhighlight %}
+    };
+    {% endhighlight %}
   </section>
   <section>
     <h2>Other Examples</h2>
