@@ -31,4 +31,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/ # Change to your build/output directory (if you have one)
-          server-dir: /art140/ # Change to the path where the site should be uploaded
+          server-dir: /public_html/art140/ # Change to the path where the site should be uploaded
