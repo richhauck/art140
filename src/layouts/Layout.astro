@@ -1,9 +1,9 @@
 ---
-import Navigation from "../components/Navigation.astro";
-import Footer from "../components/Footer.astro";
-import "../styles/global.scss";
-import "../styles/grid.css";
-import "../styles/hamburger.css";
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.scss';
+import '../styles/grid.css';
+import '../styles/hamburger.css';
 const { title, fullWidth } = Astro.props;
 ---
 
@@ -18,8 +18,8 @@ const { title, fullWidth } = Astro.props;
       function gtag() {
         dataLayer.push(arguments);
       }
-      gtag("js", new Date());
-      gtag("config", "G-WPLN8ES51X");
+      gtag('js', new Date());
+      gtag('config', 'G-WPLN8ES51X');
     </script>
 
     <meta charset="UTF-8" />
@@ -52,7 +52,7 @@ const { title, fullWidth } = Astro.props;
     <header id="primary-header">
       <div>
         <h1>Art 140: <span>Web Design</span></h1><p>
-          Fall 2025 | Harrisburg Area Community College
+          Fall 2026 | Harrisburg Area Community College
         </p>
       </div>
       <div>
@@ -63,7 +63,7 @@ const { title, fullWidth } = Astro.props;
     <main id="main">
       <Navigation />
       <div id="content">
-        <div id={fullWidth ? "inner-fullwidth" : "inner-content"}>
+        <div id={fullWidth ? 'inner-fullwidth' : 'inner-content'}>
           <h1>{title}</h1>
           <slot />
         </div>
