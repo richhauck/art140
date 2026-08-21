@@ -1,21 +1,27 @@
 ---
-const title = "Working with images";
-import { Lightbulb } from "@lucide/astro";
-import Layout from "../../../layouts/Layout.astro";
-import { Code } from "astro:components";
+const title = 'Working with images';
+import { Lightbulb } from '@lucide/astro';
+import Layout from '../../../layouts/Layout.astro';
+import { Code } from 'astro:components';
 ---
 
 <Layout title={title}>
   <h2>Files Formats</h2>
-  <p>
-    Below are different image file formats compatible with a browser. While AVIF
-  </p>
+  <p>Below are different image file formats compatible with a browser.</p>
   <table>
     <tr>
       <th>Format</th>
       <th>Use</th>
     </tr>
     <tr>
+      <tr>
+        <td>AVIF</td>
+        <td
+          ><strong>AVIF Image File Format</strong> Supports high dynamic range (HDR),
+          wide color gamut (WCG), and transparency, but is not natively supported
+          in Figma</td
+        >
+      </tr>
       <td>WebP</td>
       <td
         >Google-developed Replacement for JPG, PNG, and GIF. <a
@@ -27,20 +33,20 @@ import { Code } from "astro:components";
       </td>
     </tr>
     <tr>
+      <td>SVG</td>
+      <td
+        ><strong>Scalable Vector Graphics</strong>. XML markup. Can be embedded
+        inline or referenced as the src of an image tag. Editable in vector
+        graphics software (e.g., Adobe Illustrator, Inkscape).</td
+      >
+    </tr>
+    <tr>
       <td>JPEG XL</td>
       <td
         ><strong>JPEG XL Image File Format</strong> Better compression than JPEG,
         PNG, and WebP, but currently has very <a
           href="https://caniuse.com/?search=jpeg+xl">limited support</a
         > in modern browsers.</td
-      >
-    </tr>
-    <tr>
-      <td>AVIF</td>
-      <td
-        ><strong>AVIF Image File Format</strong> Supports high dynamic range (HDR),
-        wide color gamut (WCG), and transparency, but is not natively supported in
-        Figma</td
       >
     </tr>
     <tr>
@@ -192,22 +198,4 @@ import { Code } from "astro:components";
       >
     </p>
   </section>
-
-  <aside>
-    <h3><Lightbulb /> Tips:</h3>
-    <ul>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/SVG"
-          >Scaleable Vector Graphics (SVG)</a
-        > might be a better alternative to JPG or PNG when dealing with vector graphics.
-      </li>
-      <li>
-        <a href="https://developers.google.com/speed/webp">WebP</a> is an image format
-        that is 26% smaller than PNGs and up to 34% smaller than JPEG files. <a
-          href="https://helpx.adobe.com/photoshop/kb/support-webp-image-format.html"
-          >WebP is supported by Adobe Photoshop</a
-        >.
-      </li>
-    </ul>
-  </aside>
 </Layout>
