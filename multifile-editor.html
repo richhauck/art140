@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MiniCode Pro — Tabs + Multi-file</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+
+    <!-- Monaco Editor -->
+    <script type="module">
+      import * as monaco from 'https://cdn.jsdelivr.net/npm/monaco-editor@0.49.0/+esm';
+      window.monaco = monaco;
+    </script>
+
+    <style>
+      body {
+        margin: 0;
+        background: #0f1724;
+        color: white;
+        height: 100vh;
+        font-family: system-ui, sans-serif;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        padding: 10px 16px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      h1 {
+        font-size: 16px;
+        margin: 0;
+      }
+      .btn {
+        background: #06b6d4;
+        border: 0;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        color: #022029;
+      }
+      main {
+        flex: 1;
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        min-height: 0;
+      }
+      .sidebar {
+        background: #0b1220;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        flex-direction: column;
+      }
+      .tabs {
+        display: flex;
+        background: #111827;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .tab {
+        padding: 10px 16px;
+        cursor: pointer;
+        font-size: 13px;
+        color: #9ca3af;
+      }
+      .tab.active {
+        background: #1f2937;
+        color: white;
+      }
+      #fileList {
+        flex: 1;
+        overflow: auto;
+        padding: 10px;
+        font-size: 13px;
+      }
+      #fileList div {
+        padding: 6px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+        color: #d1d5db;
+      }
+      #fileList .active {
+        background: #374151;
+        color: white;
+      }
+      .editor-pane {
+        position: relative;
+      }
+      #editor {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      .preview-pane {
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      iframe {
+        flex: 1;
+        border: 0;
+        background: white;
+      }
+      .console {
+        height: 140px;
+        background: #09111f;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: auto;
+        font-family: monospace;
+        font-size: 13px;
+        padding: 8px;
+        color: #dbeafe;
+      }
+      .err {
+        color: #ffb4b4;
+      }
+      header .right {
+        margin-left: auto;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>MiniCode Pro</h1>
+      <div class="right">
+        <label style="font-size: 13px">
+          <input type="checkbox" id="autorun" /> Auto-run
+        </label>
+        <button id="runBtn" class="btn">Run ▶</button>
+        <button id="downloadBtn" class="btn">Download</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- Sidebar (tabs + file list) -->
+      <div class="sidebar">
+        <div class="tabs">
+          <div class="tab active" data-type="html">HTML</div>
+          <div class="tab" data-type="css">CSS</div>
+          <div class="tab" data-type="js">JS</div>
+        </div>
+
+        <div id="fileList"></div>
+      </div>
+
+      <!-- Editor -->
+      <div class="editor-pane">
+        <div id="editor"></div>
+      </div>
+
+      <!-- Preview -->
+      <div class="preview-pane">
+        <iframe
+          id="preview"
+          sandbox="allow-scripts allow-modals allow-forms"
+        ></iframe>
+        <div class="console" id="console"></div>
+      </div>
+    </main>
+
+    <script type="module">
+      import * as monaco from 'https://cdn.jsdelivr.net/npm/monaco-editor@0.49.0/+esm';
+
+      /* ----------------------------------------------------------------------------------
+   FILE STORAGE
+---------------------------------------------------------------------------------- */
+
+      let files = {
+        html: {
+          'index.html': `<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+<\/head>
+
+<body>
+  <h2>Hello from HTML 👋<\/h2>
+  <button onclick="clickMe()">Click me<\/button>
+
+  <script src="main.js"><\/script>
+<\/body>
+<\/html>`,
+        },
+
+        css: {
+          'style.css': `body{
+  background:#7c3aed;color:white;font-family:system-ui;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100vh;margin:0;
+}
+
+button{
+  background:white;color:#1e293b;border:0;padding:10px 14px;border-radius:8px;
+  cursor:pointer;
+}`,
+        },
+
+        js: {
+          'main.js': `function clickMe(){
+  console.log("Clicked!");
+}`,
+        },
+      };
+
+      let currentType = 'html';
+      let currentFile = 'index.html';
+
+      /* ----------------------------------------------------------------------------------
+   UI: TABS
+---------------------------------------------------------------------------------- */
+
+      document.querySelectorAll('.tab').forEach((tab) => {
+        tab.onclick = () => {
+          document.querySelector('.tab.active').classList.remove('active');
+          tab.classList.add('active');
+
+          currentType = tab.dataset.type;
+          loadFileList();
+        };
+      });
+
+      /* ----------------------------------------------------------------------------------
+   FILE LIST
+---------------------------------------------------------------------------------- */
+
+      const fileList = document.getElementById('fileList');
+
+      function loadFileList() {
+        fileList.innerHTML = '';
+
+        Object.keys(files[currentType]).forEach((name) => {
+          const div = document.createElement('div');
+          div.textContent = name;
+          div.dataset.filename = name;
+
+          if (name === currentFile) div.classList.add('active');
+
+          div.onclick = () => {
+            currentFile = name;
+            loadFileList();
+            editor.setValue(files[currentType][currentFile]);
+          };
+
+          fileList.appendChild(div);
+        });
+
+        // Switch to first file if needed
+        if (!files[currentType][currentFile]) {
+          currentFile = Object.keys(files[currentType])[0];
+        }
+
+        editor.setValue(files[currentType][currentFile]);
+      }
+
+      /* ----------------------------------------------------------------------------------
+   MONACO EDITOR
+---------------------------------------------------------------------------------- */
+
+      const editor = monaco.editor.create(document.getElementById('editor'), {
+        value: files.html['index.html'],
+        language: 'html',
+        theme: 'vs-dark',
+        automaticLayout: true,
+        fontSize: 13,
+        minimap: { enabled: false },
+      });
+
+      /* ----------------------------------------------------------------------------------
+   COMPOSE OUTPUT HTML
+---------------------------------------------------------------------------------- */
+
+      function buildOutput() {
+        let html = files.html['index.html'];
+        let cssBundle = Object.values(files.css).join('\n\n');
+        let jsBundle = Object.values(files.js).join('\n\n');
+
+        // Escape closing tags
+        let safeCss = cssBundle.replace(/<\/style>/gi, '<\\/style>');
+        let safeJs = jsBundle.replace(/<\/script>/gi, '<\\/script>');
+
+        // Inject CSS
+        html = html.replace('<\/head>', `<style>${safeCss}<\/style><\/head>`);
+
+        // Replace <script src="..."> with injected JS bundle
+        html = html.replace(
+          '<\/body>',
+          `<script>${consoleBridge}${safeJs}<\/script><\/body>`,
+        );
+
+        return html;
+      }
+
+      /* Bridge to send console logs & errors back */
+      const consoleBridge =
+        '(function(){\\n  function send(t,a){ parent.postMessage({__mc:true,type:t,args:[...a]}, "*"); }\\n  ["log","warn","error"].forEach(fn=>{\\n    const o = console[fn];\\n    console[fn] = function(){ send(fn,arguments); o.apply(console,arguments); };\\n  });\\n  window.onerror = (m)=>send("error",[m]);\\n})();';
+
+      /* ----------------------------------------------------------------------------------
+   RUN PREVIEW
+---------------------------------------------------------------------------------- */
+      loadFileList();
+
+      editor.onDidChangeModelContent(() => {
+        files[currentType][currentFile] = editor.getValue();
+        if (autorun.checked) debounce(run, 400);
+      });
+
+      const iframe = document.getElementById('preview');
+      const consoleEl = document.getElementById('console');
+      const autorun = document.getElementById('autorun');
+
+      function run() {
+        consoleEl.innerHTML = '';
+        iframe.srcdoc = buildOutput();
+      }
+
+      document.getElementById('runBtn').onclick = run;
+
+      /* Console messages */
+      window.addEventListener('message', (e) => {
+        if (e.source !== iframe.contentWindow) return; // only accept messages from the preview iframe
+        if (!e.data || !e.data.__mc) return;
+        const div = document.createElement('div');
+        div.className = e.data.type === 'error' ? 'err' : '';
+        div.textContent = e.data.args.join(' ');
+        consoleEl.appendChild(div);
+      });
+
+      /* Debounce helper */
+      let timer;
+      function debounce(fn, ms) {
+        clearTimeout(timer);
+        timer = setTimeout(fn, ms);
+      }
+
+      /* ----------------------------------------------------------------------------------
+   DOWNLOAD
+---------------------------------------------------------------------------------- */
+
+      document.getElementById('downloadBtn').onclick = () => {
+        const blob = new Blob([buildOutput()], { type: 'text/html' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'export.html';
+        a.click();
+      };
+    </script>
+  </body>
+</html>
