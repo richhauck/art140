@@ -83,7 +83,7 @@ import { Code } from 'astro:components';
   <h2>Placing into HTML</h2>
   <h3>Image Tag</h3>
   <Code
-    code={`<img src="flowers.jpg" alt="picture of flowers" />`}
+    code={`<img src="flowers.avif" alt="picture of flowers" />`}
     lang="html"
   />
 
@@ -92,7 +92,7 @@ import { Code } from 'astro:components';
 
   <Code
     code={`<figure>
-  <img src="flowers.jpg" alt="flowers">
+  <img src="flowers.avif" alt="flowers">
   <figcaption>Picture of flowers in Washington Square</figcaption>
 </figure>`}
     lang="html"
@@ -114,10 +114,10 @@ import { Code } from 'astro:components';
 
   <Code
     code={`<picture>
-  <source media="(min-width: 800px)" srcset="flowers-800.jpg">
-  <source media="(min-width: 600px)" srcset="flowers-600.jpg">
-  <source srcset="flowers-320.jpg">
-  <img srcset="flowers.jpg" alt="This picture loads on non-supporting browsers.">
+  <source media="(min-width: 800px)" srcset="flowers-800.avif">
+  <source media="(min-width: 600px)" srcset="flowers-600.avif">
+  <source srcset="flowers-320.avif">
+  <img srcset="flowers.avif" alt="This picture loads on non-supporting browsers.">
 </picture>`}
     lang="html"
   />
@@ -159,11 +159,11 @@ import { Code } from 'astro:components';
     <p><b>In CSS:</b></p>
     <Code
       code={`#background{
-  background: url(flowers-800.jpg) no-repeat;
+  background: url('flowers-800.avif') no-repeat;
 }
 @media (max-width: 800px) {
   #background{
-    background: url(flowers-600.jpg) no-repeat;
+    background: url('flowers-600.avif') no-repeat;
   }
 }`}
       lang="css"

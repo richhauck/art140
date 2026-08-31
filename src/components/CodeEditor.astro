@@ -1,0 +1,285 @@
+---
+interface Props {
+  sample?: string;
+}
+
+const {
+  sample = `<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body{
+      font-family:system-ui;display:flex;align-items:center;justify-content:center;
+      height:100vh;margin:0;background:#7c3aed;color:white;
+    }
+    button{
+      background:white;color:#1e293b;border:0;padding:10px 14px;border-radius:8px;
+      cursor:pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Hello from the preview 👋</h2>
+  <button onclick="console.log('Clicked!')">Click me</button>
+
+  <script>
+    console.log("Preview Loaded");
+  </script>
+
+</body>
+</html>`,
+} = Astro.props;
+---
+
+<div class="mc-editor">
+  <header>
+    <h1>MiniCode — Syntax Highlighting</h1>
+
+    <div class="controls">
+      <label style="font-size: 13px; color: var(--muted)">
+        <input id="autorun" type="checkbox" /> Auto-run
+      </label>
+
+      <button id="runBtn" class="btn">▶ Run</button>
+      <button id="resetBtn" class="btn secondary">Reset</button>
+      <button id="downloadBtn" class="btn secondary">Download</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="pane">
+      <div class="title">HTML / CSS / JS</div>
+      <div id="editorContainer"></div>
+    </section>
+
+    <section class="pane">
+      <div class="title">Preview</div>
+      <iframe id="preview" sandbox="allow-scripts allow-modals allow-forms"></iframe>
+      <div class="console" id="console"></div>
+    </section>
+  </main>
+</div>
+
+<script type="module" define:vars={{ initialSample: sample }}>
+  /* ---------------------- Monaco Setup ---------------------- */
+  import * as monaco from 'https://cdn.jsdelivr.net/npm/monaco-editor@0.49.0/+esm';
+
+  let editor = monaco.editor.create(
+    document.getElementById('editorContainer'),
+    {
+      value: initialSample,
+      language: 'html',
+      theme: 'vs-dark',
+      automaticLayout: true,
+      fontSize: 13,
+      minimap: { enabled: false },
+    },
+  );
+
+  /* ---------------------- Preview Runner ---------------------- */
+  const preview = document.getElementById('preview');
+  const autorun = document.getElementById('autorun');
+  const consoleEl = document.getElementById('console');
+
+  function buildSrcDoc(html) {
+    // Sanitize the editor HTML to remove <script> tags and event-handler attributes
+    // DOMPurify is loaded below and will remove unsafe tags/attributes
+    const clean =
+      typeof DOMPurify !== 'undefined'
+        ? DOMPurify.sanitize(html, {
+            FORCE_BODY: true,
+            FORBID_TAGS: ['script'],
+            FORBID_ATTR: [
+              'onerror',
+              'onclick',
+              'onload',
+              'onmouseover',
+              'onfocus',
+              'onmouseout',
+              'onmouseenter',
+              'onmouseleave',
+              'onkeyup',
+              'onkeydown',
+              'onkeypress',
+              'onsubmit',
+              'onchange',
+              'oninput',
+              'onabort',
+            ],
+          })
+        : // fallback: basic strip of script tags if DOMPurify isn't available
+          String(html).replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '');
+
+    return (
+      `
+    <script>
+      (function(){
+        function send(type, args){
+          parent.postMessage({__mc:true,type,args:[...args]}, "*");
+        }
+        ["log","info","warn","error"].forEach(fn=>{
+          const orig = console[fn];
+          console[fn] = function(){ send(fn, arguments); orig.apply(console, arguments); };
+        });
+        window.onerror = (msg,src,line,col,err)=>send("error",[msg]);
+      })();
+    </script>
+  ` + clean
+    );
+  }
+
+  function run() {
+    consoleEl.innerHTML = '';
+    const html = buildSrcDoc(editor.getValue());
+    preview.srcdoc = html;
+  }
+
+  function logToConsole(type, msg) {
+    const div = document.createElement('div');
+    div.className = type === 'error' ? 'err' : '';
+    div.textContent = msg;
+    consoleEl.appendChild(div);
+    consoleEl.scrollTop = consoleEl.scrollHeight;
+  }
+
+  window.addEventListener('message', (e) => {
+    if (e.source !== preview.contentWindow) return; // only accept messages from the preview iframe
+    if (!e.data || !e.data.__mc) return;
+    let txt = e.data.args.map((x) => String(x)).join(' ');
+    logToConsole(e.data.type, txt);
+  });
+
+  /* ---------------------- Controls ---------------------- */
+  document.getElementById('runBtn').onclick = run;
+
+  document.getElementById('resetBtn').onclick = () => {
+    editor.setValue(initialSample);
+    run();
+  };
+
+  document.getElementById('downloadBtn').onclick = () => {
+    const blob = new Blob([editor.getValue()], { type: 'text/html' });
+    const a = Object.assign(document.createElement('a'), {
+      href: URL.createObjectURL(blob),
+      download: 'playground.html',
+    });
+    a.click();
+  };
+
+  let debounceTimer;
+  editor.onDidChangeModelContent(() => {
+    if (!autorun.checked) return;
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(run, 500);
+  });
+
+  /* Initial load */
+  run();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+
+<style>
+  .mc-editor {
+    --bg: #0f1724;
+    --editor-bg: #071428;
+    --editor-fg: #e6eef6;
+    --muted: #94a3b8;
+    --accent: #06b6d4;
+    --shadow: 0 6px 20px rgba(2, 6, 23, 0.6);
+    --radius: 10px;
+    --gap: 12px;
+
+    margin: 0;
+    background: #0f1724;
+    color: white;
+    height: 100vh;
+    padding: 16px;
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mc-editor header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .mc-editor header h1 {
+    margin: 0;
+    font-size: 16px;
+  }
+  .mc-editor .controls {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .mc-editor .btn {
+    background: linear-gradient(180deg, var(--accent), #0ea5b7);
+    color: #022029;
+    border: 0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .mc-editor .btn.secondary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--muted);
+  }
+  .mc-editor main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap);
+    flex: 1;
+    min-height: 0;
+  }
+  .mc-editor .pane {
+    background: #06101f;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .mc-editor .title {
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--muted);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .mc-editor #editorContainer {
+    flex: 1;
+    min-height: 0;
+  }
+  .mc-editor iframe {
+    width: 100%;
+    flex: 1;
+    border: 0;
+    background: white;
+  }
+  .mc-editor .console {
+    height: 120px;
+    background: #041026;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    font-family: monospace;
+    font-size: 13px;
+    overflow: auto;
+    color: #dbeafe;
+  }
+  .mc-editor .console .err {
+    color: #ffb4b4;
+  }
+  @media (max-width: 900px) {
+    .mc-editor main {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+  }
+</style>
