@@ -18,6 +18,12 @@ const exercisesOpen = [
   "09",
   "10",
 ].some((n) => pathname.startsWith(`${base}exercises/${n}`));
+
+const resourcesOpen = pathname.startsWith(`${base}resources/`);
+
+const lessonsOpen = pathname.startsWith(`${base}lessons/`);
+
+const tutorialsOpen = pathname.startsWith(`${base}tutorials/`);
 ---
 
 <nav id="primary-nav">
@@ -85,99 +91,113 @@ const exercisesOpen = [
         </details>
       </li>
       <li>
-        Resources
-        <ul>
-          <li>
-            <a href={`${import.meta.env.BASE_URL}resources/sitemap/`}>Sitemap</a
-            >
-          </li>
-          <li>
-            <a href={`${import.meta.env.BASE_URL}resources/wireframes`}
-              >Wireframes</a
-            >
-          </li>
-          <li>
-            <a href={`${import.meta.env.BASE_URL}resources/images-icons/`}
-              >Stock Images and Icons</a
-            >
-          </li>
-          <li>
-            <a href={`${import.meta.env.BASE_URL}resources/web-fonts/`}
-              >Web Fonts</a
-            >
-          </li>
-          <li>
-            <a href={`${import.meta.env.BASE_URL}resources/flexbox/`}>Flexbox</a
-            >
-          </li>
-          <li>
-            <a href={`${import.meta.env.BASE_URL}resources/grid/`}>Grid</a>
-          </li>
-          <li>
-            <a
-              href={`${import.meta.env.BASE_URL}resources/component-libraries/`}
-              >Component Libraries</a
-            >
-          </li>
-          <li>
-            <a href={`${import.meta.env.BASE_URL}resources/frameworks/`}
-              >Frameworks</a
-            >
-          </li>
-        </ul>
+        <details open={resourcesOpen}>
+          <summary>Resources</summary>
+          <div class="content">
+            <ul>
+              <li>
+                <a href={`${import.meta.env.BASE_URL}resources/sitemap/`}
+                  >Sitemap</a
+                >
+              </li>
+              <li>
+                <a href={`${import.meta.env.BASE_URL}resources/wireframes`}
+                  >Wireframes</a
+                >
+              </li>
+              <li>
+                <a href={`${import.meta.env.BASE_URL}resources/images-icons/`}
+                  >Stock Images and Icons</a
+                >
+              </li>
+              <li>
+                <a href={`${import.meta.env.BASE_URL}resources/web-fonts/`}
+                  >Web Fonts</a
+                >
+              </li>
+              <li>
+                <a href={`${import.meta.env.BASE_URL}resources/flexbox/`}
+                  >Flexbox</a
+                >
+              </li>
+              <li>
+                <a href={`${import.meta.env.BASE_URL}resources/grid/`}>Grid</a>
+              </li>
+              <li>
+                <a
+                  href={`${import.meta.env.BASE_URL}resources/component-libraries/`}
+                  >Component Libraries</a
+                >
+              </li>
+              <li>
+                <a href={`${import.meta.env.BASE_URL}resources/frameworks/`}
+                  >Frameworks</a
+                >
+              </li>
+            </ul>
+          </div>
+        </details>
       </li>
       <li>
         <a href={`${import.meta.env.BASE_URL}ui-examples/`}>UI Examples</a>
       </li>
       <li>
-        Lessons
-        <ul>
-          <li>
-            <a href={`${import.meta.env.BASE_URL}lessons/getting-started/`}
-              >Getting Started</a
-            >
+        <details open={lessonsOpen}>
+          <summary>Lessons</summary>
+          <div class="content">
             <ul>
               <li>
+                <a href={`${import.meta.env.BASE_URL}lessons/getting-started/`}
+                  >Getting Started</a
+                >
+                <ul>
+                  <li>
+                    <a
+                      href={`${import.meta.env.BASE_URL}lessons/getting-started/figma`}
+                      >Figma</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href={`${import.meta.env.BASE_URL}lessons/intro-html/`}
+                  >Introduction to HTML</a
+                >
+              </li>
+              <li>
                 <a
-                  href={`${import.meta.env.BASE_URL}lessons/getting-started/figma`}
-                  >Figma</a
+                  href={`${import.meta.env.BASE_URL}lessons/working-with-images/`}
+                  >Working with Images</a
+                >
+              </li>
+              <li>
+                <a href={`${import.meta.env.BASE_URL}lessons/css-basics/`}
+                  >CSS Basics</a
                 >
               </li>
             </ul>
-            <li>
-              <a href={`${import.meta.env.BASE_URL}lessons/intro-html/`}
-                >Introduction to HTML</a
-              >
-            </li>
-            <li>
-              <a
-                href={`${import.meta.env.BASE_URL}lessons/working-with-images/`}
-                >Working with Images</a
-              >
-            </li>
-            <li>
-              <a href={`${import.meta.env.BASE_URL}lessons/css-basics/`}
-                >CSS Basics</a
-              >
-            </li>
-          </li>
-        </ul>
-        <li>
-          Tutorials
-          <ul>
-            <li>
-              <a href=`${import.meta.env.BASE_URL}tutorials/navigation/`
-                >Navigation</a
-              >
-            </li>
-            <li>
-              <a
-                href=`${import.meta.env.BASE_URL}tutorials/responsive-navigation/`
-                >Responsive Navigation</a
-              >
-            </li>
-          </ul>
-        </li>
+          </div>
+        </details>
+      </li>
+      <li>
+        <details open={tutorialsOpen}>
+          <summary>Tutorials</summary>
+          <div class="content">
+            <ul>
+              <li>
+                <a href={`${import.meta.env.BASE_URL}tutorials/navigation/`}
+                  >Navigation</a
+                >
+              </li>
+              <li>
+                <a
+                  href={`${import.meta.env.BASE_URL}tutorials/responsive-navigation/`}
+                  >Responsive Navigation</a
+                >
+              </li>
+            </ul>
+          </div>
+        </details>
       </li>
     </ul>
   </div>

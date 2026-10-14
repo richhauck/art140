@@ -1,0 +1,85 @@
+---
+const { title } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+// Build a set of routes that actually have pages, so intermediate
+// folders without an index (e.g. /projects/) render as plain text.
+const pageFiles = Object.keys(
+  import.meta.glob('../pages/**/*.{astro,md,mdx,html}'),
+);
+const routes = new Set(
+  pageFiles.map((file) =>
+    file
+      .replace('../pages/', '')
+      .replace(/\.(astro|mdx?|html)$/, '')
+      .replace(/(^|\/)index$/, ''),
+  ),
+);
+
+const prettify = (segment: string) =>
+  segment
+    .split('-')
+    .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+const segments = Astro.url.pathname
+  .replace(base, '')
+  .split('/')
+  .filter(Boolean);
+
+const crumbs = segments.map((segment, i) => {
+  const route = segments.slice(0, i + 1).join('/');
+  const isLast = i === segments.length - 1;
+  return {
+    label: isLast && title ? title : prettify(segment),
+    href: !isLast && routes.has(route) ? `${base}${route}` : null,
+    isLast,
+  };
+});
+---
+
+{
+  crumbs.length > 0 && (
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li>
+          <a href={base}>Home</a>
+        </li>
+        {crumbs.map(({ label, href, isLast }) => (
+          <li>
+            {href ? (
+              <a href={href}>{label}</a>
+            ) : (
+              <span aria-current={isLast ? 'page' : undefined}>{label}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+<style>
+  .breadcrumbs {
+    margin: 0 0 1.5em 0;
+    font-size: 0.85em;
+  }
+  :global(#content) .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0 !important;
+  }
+  :global(#content) .breadcrumbs li {
+    padding: 0;
+  }
+  .breadcrumbs li + li::before {
+    content: '/';
+    margin: 0 0.5em;
+    color: var(--borderColor);
+  }
+  .breadcrumbs [aria-current='page'] {
+    color: var(--textColor);
+  }
+</style>
