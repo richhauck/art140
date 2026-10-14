@@ -2,6 +2,8 @@
 const title = 'CSS Basics';
 import Layout from '../../../layouts/Layout.astro';
 import { Code } from 'astro:components';
+import CodePreview from '../../../components/CodePreview.astro';
+import { boxModel, absolutePositioning } from '../../../data/codeExamples';
 ---
 
 <Layout title={title}>
@@ -173,62 +175,10 @@ import { Code } from 'astro:components';
     border, and width/height. In the example below, the width and height will be
     350px, despite the width and height being set to 300px.
   </p>
-  <p
-    class="codepen"
-    data-height="300"
-    data-default-tab="html,result"
-    data-slug-hash="yLjYzJe"
-    data-user="richhauck"
-    style="
-    height: 300px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid;
-    margin: 1em 0;
-    padding: 1em;
-  "
-  >
-    <span
-      >See the Pen
-      <a href="https://codepen.io/richhauck/pen/yLjYzJe"> Box Model</a> by Rich Hauck
-      (<a href="https://codepen.io/richhauck">@richhauck</a>) on
-      <a href="https://codepen.io">CodePen</a>.</span
-    >
-  </p>
-  <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"
-  ></script>
+  <CodePreview {...boxModel} />
   <hr />
   <h2>Absolute Positioning</h2>
-  <p
-    class="codepen"
-    data-height="300"
-    data-default-tab="html,result"
-    data-slug-hash="MWGaEmj"
-    data-user="richhauck"
-    style="
-    height: 300px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid;
-    margin: 1em 0;
-    padding: 1em;
-  "
-  >
-    <span
-      >See the Pen
-      <a href="https://codepen.io/richhauck/pen/MWGaEmj">
-        Absolute Positioning</a
-      >
-      by Rich Hauck (<a href="https://codepen.io/richhauck">@richhauck</a>) on
-      <a href="https://codepen.io">CodePen</a>.</span
-    >
-  </p>
-  <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"
-  ></script>
+  <CodePreview {...absolutePositioning} />
 
   <hr />
   <h2>Reset</h2>

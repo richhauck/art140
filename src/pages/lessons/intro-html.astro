@@ -2,6 +2,8 @@
 const title = "Introduction to HTML";
 import Layout from "../../layouts/Layout.astro";
 import { Code } from "astro:components";
+import CodePreview from "../../components/CodePreview.astro";
+import { headings, paragraphs, lists } from "../../data/codeExamples";
 ---
 
 <Layout title={title}>
@@ -65,90 +67,15 @@ import { Code } from "astro:components";
     page. Subsequent headlines should follow the respective hierarchy. Bear in
     mind search engines weigh the value of these headings.
   </p>
-  <p
-    class="codepen"
-    data-height="300"
-    data-default-tab="html,result"
-    data-slug-hash="ExLjYrd"
-    data-user="richhauck"
-    style="
-    height: 300px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid;
-    margin: 1em 0;
-    padding: 1em;
-  "
-  >
-    <span
-      >See the Pen
-      <a href="https://codepen.io/richhauck/pen/ExLjYrd"> Headings</a> by Rich Hauck
-      (<a href="https://codepen.io/richhauck">@richhauck</a>) on
-      <a href="https://codepen.io">CodePen</a>.</span
-    >
-  </p>
-  <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"
-  ></script>
+  <CodePreview {...headings} />
   <hr />
 
   <h2>Paragraphs</h2>
-  <p
-    class="codepen"
-    data-height="300"
-    data-default-tab="html,result"
-    data-slug-hash="jOxPOPY"
-    data-user="richhauck"
-    style="
-    height: 300px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid;
-    margin: 1em 0;
-    padding: 1em;
-  "
-  >
-    <span
-      >See the Pen
-      <a href="https://codepen.io/richhauck/pen/jOxPOPY"> Untitled</a> by Rich Hauck
-      (<a href="https://codepen.io/richhauck">@richhauck</a>) on
-      <a href="https://codepen.io">CodePen</a>.</span
-    >
-  </p>
-  <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"
-  ></script>
+  <CodePreview {...paragraphs} />
 
   <hr />
   <h2>Lists</h2>
-  <p
-    class="codepen"
-    data-height="300"
-    data-default-tab="html,result"
-    data-slug-hash="BaxNBEL"
-    data-user="richhauck"
-    style="
-    height: 300px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid;
-    margin: 1em 0;
-    padding: 1em;
-  "
-  >
-    <span
-      >See the Pen
-      <a href="https://codepen.io/richhauck/pen/BaxNBEL"> Lists</a> by Rich Hauck
-      (<a href="https://codepen.io/richhauck">@richhauck</a>) on
-      <a href="https://codepen.io">CodePen</a>.</span
-    >
-  </p>
-  <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"
-  ></script>
+  <CodePreview {...lists} />
 
   <hr />
   <h2>Hyperlinks</h2>
