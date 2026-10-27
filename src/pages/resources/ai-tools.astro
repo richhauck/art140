@@ -1,0 +1,152 @@
+---
+const title = 'AI Tools';
+import Layout from '../../layouts/Layout.astro';
+import {
+  Image,
+  SquareDashed,
+  Library,
+  Bot,
+  Palette,
+  PencilRuler,
+} from '@lucide/astro';
+---
+
+<Layout title={title} fullWidth={false}>
+  <p>
+    AI-generated designs are emerging as a starting point in the design process.
+    Often, this includes creating a <a
+      href="https://stitch.withgoogle.com/docs/design-md/specification"
+      >DESIGN.md</a
+    > file that describes the design system, and then generating a prototype or mockup
+    from that. Some tools can also generate code for the front-end, which can be
+    used as a starting point for development.
+  </p>
+  <p>Here's a list of AI tools that can help with design (as of late 2026):</p>
+  <div
+    class="table-wrapper"
+    role="region"
+    aria-label="AI design tools comparison"
+    tabindex="0"
+  >
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Maker</th>
+          <th>What it generates</th>
+          <th>Where you work</th>
+          <th>Design system support</th>
+          <th>Export / handoff</th>
+          <th>Pricing</th>
+          <th>Best for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.figma.com/make/">Figma Make</a></td>
+          <td>Figma</td>
+          <td>Working, code-backed prototypes and apps (React + Tailwind)</td>
+          <td>Inside Figma (web)</td>
+          <td
+            >Can import your existing Figma libraries; npm packages, including
+            private ones on paid plans</td
+          >
+          <td
+            >Publish as a hosted app, view/edit the code, Figma MCP for coding
+            agents</td
+          >
+          <td
+            >Free tier available; paid seats from about $20/mo; uses AI credits</td
+          >
+          <td
+            >Teams already on Figma that want clickable prototypes close to real
+            code</td
+          >
+        </tr>
+        <tr>
+          <td><a href="https://stitch.withgoogle.com/">Google Stitch</a></td>
+          <td>Google Labs (formerly Galileo AI)</td>
+          <td>Multi-screen UI designs, plus code</td>
+          <td>Browser canvas, with voice control</td>
+          <td
+            >Generates an open DESIGN.md file; can pull styles from existing
+            sites</td
+          >
+          <td>Paste to Figma, code export, MCP server and SDK, AI Studio</td>
+          <td>Free (Labs experiment)</td>
+          <td
+            >Fast ideation and exploring several directions, especially for
+            non-designers</td
+          >
+        </tr>
+        <tr>
+          <td><a href="https://www.pen.dev/">Pen.dev</a></td>
+          <td>Pencil (Tom Krcha)</td>
+          <td>Editable vector designs on an infinite canvas (.pen files)</td>
+          <td>Inside your IDE (Cursor, VS Code) or desktop app</td>
+          <td>Bring your own design system, with tokens and variables</td>
+          <td
+            >MCP lets Claude Code, Cursor or Codex read the designs and
+            implement them; designs are versioned in Git with the code</td
+          >
+          <td
+            >Free in early access; AI usage runs through your own Claude or
+            OpenAI account</td
+          >
+          <td
+            >Developers or design engineers who want design and code in one repo</td
+          >
+        </tr>
+        <tr>
+          <td><a href="https://claude.ai/design">Claude Artifacts</a></td>
+          <td>Anthropic Labs</td>
+          <td>Prototypes, UI mockups, slides, one-pagers, marketing assets</td>
+          <td>claude.ai (web)</td>
+          <td
+            >Builds a design system from your codebase and design files and
+            applies it automatically; supports more than one system</td
+          >
+          <td
+            >HTML, PDF, PPTX, URL, send to Canva, handoff bundle for Claude Code</td
+          >
+          <td>Included with Claude Pro, Max, Team and Enterprise</td>
+          <td>On-brand prototypes plus decks and collateral in one place</td>
+        </tr>
+        <tr>
+          <td><a href="https://v0.app/">v0</a></td>
+          <td>Vercel</td>
+          <td>React/Next.js UI and full front-end apps</td>
+          <td>Browser, with a visual Design Mode</td>
+          <td>Works from your components and code</td>
+          <td>GitHub sync, one-click deploy to Vercel</td>
+          <td
+            >Free tier ($5 of credits, 7 messages a day); paid plans from about
+            $30/user/mo</td
+          >
+          <td>Production-quality front-end code, fast</td>
+        </tr>
+        <tr>
+          <td><a href="https://uxpilot.ai/">UX Pilot</a></td>
+          <td>UX Pilot</td>
+          <td>Wireframes, hi-fi mockups, screen flows</td>
+          <td>Web app and Figma plugin</td>
+          <td>Limited</td>
+          <td>Figma</td>
+          <td>Free and paid plans</td>
+          <td>Wireframing and early UX flows</td>
+        </tr>
+        <tr>
+          <td><a href="https://uizard.io/">Uizard</a></td>
+          <td>Uizard</td>
+          <td>Mockups and wireframes from text, screenshots or hand sketches</td
+          >
+          <td>Web app</td>
+          <td>Basic</td>
+          <td>Prototype sharing</td>
+          <td>Free (limited) and paid plans</td>
+          <td>Non-designers turning sketches into screens</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</Layout>

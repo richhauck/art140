@@ -102,3 +102,39 @@ import {
     </grid-row>
   </grid-container>
 </Layout>
+
+<style>
+  grid-container {
+    padding-inline: 0;
+  }
+  grid-row + grid-row {
+    margin-top: 1rem;
+  }
+  grid-col {
+    background-color: #fff;
+    border: 1px solid var(--borderColor);
+    border-top: 6px solid var(--red);
+    padding: 0 1.25rem 1rem;
+    transition: var(--transition);
+  }
+  grid-col:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--borderColor);
+    font-size: 1.25rem;
+  }
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+  li {
+    margin-bottom: 0.35rem;
+  }
+</style>

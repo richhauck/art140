@@ -3,10 +3,10 @@
   --darkRed: #49141a;
   --lightRed: #f7a8b0;
   --blue: #3070ab;
-  --headertextcolor: #353843;
+  --headertextcolor: #6a6c75;
   --textColor: #707070;
   --iconStroke: #ccc;
-  --bgcolor: #353843;
+  --bgcolor: #4f525d;
   --lightGray: #f9f9fa;
   --borderColor: #dcdee6;
   --basePadding: 1em;
@@ -23,8 +23,8 @@ body {
   margin: 0;
   padding: 0;
   font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
-    Cantarell, "Helvetica Neue", sans-serif;
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu,
+    Cantarell, 'Helvetica Neue', sans-serif;
   line-height: 1.5rem;
 }
 h1 {
@@ -114,8 +114,21 @@ td,
 th {
   font-size: 14px;
   border-top: 0.5px solid var(--borderColor);
-  padding: 4px;
+  padding: 8px 12px;
   vertical-align: top;
+  line-height: 1.25rem;
+}
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: var(--basePadding) 0;
+  table {
+    min-width: 960px;
+  }
+  &:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
 }
 th ul {
   margin-top: 0;
@@ -198,7 +211,7 @@ svg.lucide {
     }
   }
   ul.columns::after {
-    content: "";
+    content: '';
     display: table;
     clear: both;
   }
