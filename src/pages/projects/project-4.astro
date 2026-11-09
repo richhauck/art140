@@ -6,95 +6,662 @@ import Layout from '../../layouts/Layout.astro';
 <Layout title={title}>
   <h2>Project Description:</h2>
   <p>
-    For your final project, you will be creating a website for a small art
-    museum. create a small business website for. You can use the content here: <a
+    Design and build a responsive, multi-page website for the Aurora Art Museum,
+    a contemporary art museum in downtown Harrisburg, PA, founded in 1998. The
+    site is the ART 140 final project and should demonstrate the full process
+    taught in the course: research, sitemap, wireframes, branding, a clickable
+    Figma prototype, and a coded site published to GitHub Pages. You can use the
+    content here: <a
       href=`${import.meta.env.BASE_URL}assets/project-4-content.pdf`
       >project-4-content.pdf</a
     >. This project should exhibit the skills you have developed in this class.
   </p>
-  <h2>Process:</h2>
-
-  <strong>Research</strong>
+  <table>
+    <colgroup>
+      <col />
+      <col />
+    </colgroup>
+    <tbody>
+      <tr>
+        <th colspan="1" rowspan="1"><p>Client fact</p></th>
+        <th colspan="1" rowspan="1"><p>Detail</p></th>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Name</p></td>
+        <td colspan="1" rowspan="1"><p>Aurora Art Museum</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Address</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>123 Main Street, Harrisburg, PA 17110</p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Founded</p></td>
+        <td colspan="1" rowspan="1"><p>1998</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Collection</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>
+            2,000+ pieces; contemporary installations, modern painting,
+            textiles, new media, pre-Columbian objects
+          </p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Spaces</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>
+            Light-filled galleries, sculpture garden, café, gift shop,
+            Creativity Lab
+          </p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Mission</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>
+            A space where diverse voices are represented, ideas are exchanged,
+            and every visitor feels they belong
+          </p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Contact</p></td>
+        <td colspan="1" rowspan="1"><p>info@auroraartmuseum.test</p></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <strong>The problem to solve:</strong> the museum's content is rich but scattered.
+    Visitors need to find hours, tickets and what's on in seconds, while the design
+    should still feel like an art space, not a brochure.
+  </p>
+  <h2>Goals &amp; objectives</h2>
+  <p>
+    The site succeeds if a first-time visitor can plan a trip in under a minute
+    and leaves wanting to come back.
+  </p>
+  <p><strong>Business goals (the museum)</strong></p>
   <ol>
     <li>
-      Find and critique three similar (3) websites. Submit your critiques on
-      D2L. You might want to review both large museum sites (the MET, MoMA, The
-      Louvre, etc.) as well as smaller local museums.
+      Drive visits: make hours, admission and location impossible to miss.
+    </li>
+    <li>
+      Promote current and upcoming exhibitions (<em>Light &amp; Shadow</em>, <em
+        >Local Visions</em
+      >, <em>Threads of Memory</em> on Oct 12, <em>The Digital Canvas</em> on Dec
+      1).
+    </li>
+    <li>Grow membership ($60–$500/year tiers) and donations.</li>
+    <li>
+      Fill events and education programs (First Fridays, Artist Talks, Family
+      Sundays, field trips).
     </li>
   </ol>
-  <strong>Design</strong>
+  <p><strong>User goals (the visitor)</strong></p>
   <ol>
-    <li>Create a sitemap in FigJam outlining the pages of your site</li>
-    <li>Create a wireframe in Figma of your interface</li>
-    <li>
-      Establish a brand--a logo, color palette (minimum 5 colors), and messaging
-    </li>
-    <li>
-      Photograph, illustrate, or find Creative Commons-licensed images to
-      incorporate into your design.
-    </li>
-    <li>
-      Design your site in Figma responsively and link on D2L. At a minimum, your
-      desktop frames should be interactive and work as a click-through prototype
-    </li>
+    <li>Find when it's open, what it costs and how to get there.</li>
+    <li>See what's on now and what's coming.</li>
+    <li>Learn about the artists and collection before or after a visit.</li>
+    <li>Sign up for an event, workshop, membership or volunteer role.</li>
   </ol>
-  <strong>Development</strong>
-  <ol start="3" type="1">
-    <ol start="1" type="a">
-      <li>
-        Your finished project should be responsive and published to GitHub pages
-        and linked on D2L
-      </li>
-    </ol>
-  </ol>
+  <p><strong>Course goals (the grade)</strong></p>
+  <ul>
+    <li>Show a clear research-to-design process with documented decisions.</li>
+    <li>
+      Demonstrate a cohesive brand applied consistently across every page.
+    </li>
+    <li>
+      Deliver a responsive layout that works from 320px phones to 1440px
+      desktops.
+    </li>
+  </ul>
+  <h2>Target audiences</h2>
+  <p>
+    The museum names four audiences in its own copy; design every page so at
+    least one of them has an obvious next step.
+  </p>
+  <table>
+    <colgroup>
+      <col />
+      <col />
+      <col />
+    </colgroup>
+    <tbody>
+      <tr>
+        <th colspan="1" rowspan="1"><p>Audience</p></th>
+        <th colspan="1" rowspan="1"><p>What they need</p></th>
+        <th colspan="1" rowspan="1"><p>Where the site serves them</p></th>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Families with kids</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>
+            Free under-12 admission, hands-on activities, weekend times
+          </p></td
+        >
+        <td colspan="1" rowspan="1"
+          ><p>Family Sundays, Creativity Lab, family festivals</p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Art students &amp; locals</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>Artist backgrounds, new shows, community connection</p></td
+        >
+        <td colspan="1" rowspan="1"
+          ><p>Exhibitions, artist bios, Local Visions, Artist Talks</p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Curious travelers</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>Quick logistics, "must-see" highlights</p></td
+        >
+        <td colspan="1" rowspan="1"
+          ><p>
+            Visit information, collection highlights, café &amp; sculpture
+            garden
+          </p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Members &amp; donors</p></td>
+        <td colspan="1" rowspan="1"><p>Benefits, previews, ways to give</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>Membership tiers, Support Us, members-only previews</p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Teachers &amp; schools</p></td>
+        <td colspan="1" rowspan="1"><p>Field trip booking, lesson plans</p></td>
+        <td colspan="1" rowspan="1"><p>Education: For Schools</p></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    <strong>Primary persona idea:</strong> a parent planning a Sunday outing — logistics-first
+    and kid-friendly. Consider one or two short personas to guide wireframe decisions.
+  </p>
+  <h2>Research &amp; competitive analysis</h2>
+  <p>
+    Find and critique three similar museum websites and submit your critiques on
+    D2L. Choose a mix: at least one large museum and at least one smaller or
+    local museum.
+  </p>
+  <p><strong>Critique checklist (use the same lens for all three):</strong></p>
+  <ul>
+    <li>
+      <strong>First impression:</strong> what is the homepage's single message? How
+      fast can you find hours and tickets?
+    </li>
+    <li>
+      <strong>Navigation &amp; IA:</strong> number of top-level items, labels, mobile
+      menu behavior.
+    </li>
+    <li>
+      <strong>Visual design:</strong> type, color, use of imagery, white space, how
+      art is framed.
+    </li>
+    <li>
+      <strong>Brand voice:</strong> formal or playful? How does it speak to families
+      vs. scholars?
+    </li>
+    <li>
+      <strong>Responsiveness:</strong> test at phone width — what changes, what breaks?
+    </li>
+    <li>
+      <strong>Accessibility:</strong> contrast, alt text, focus states, text size.
+    </li>
+    <li>
+      <strong>Calls to action:</strong> visit, become a member, donate, sign up —
+      how prominent?
+    </li>
+    <li>
+      <strong>Steal-worthy idea:</strong> consider patterns to adapt for your projects
+      as well as ones to avoid.
+    </li>
+  </ul>
+  <h2
+    data-lfile-container="bc8f4e5e-9438-427b-986b-9f72cf32c756"
+    data-pm-slice="1 4 []"
+  >
+    Sitemap &amp; content inventory
+  </h2>
+  <p>
+    Build this in FigJam as your sitemap deliverable. Visit is the accent
+    because hours and tickets are the most common task; pin a <em
+      >Plan Your Visit</em
+    > button in the header on every page.
+  </p>
+  <table>
+    <colgroup>
+      <col />
+      <col />
+      <col />
+    </colgroup>
+    <tbody>
+      <tr>
+        <th colspan="1" rowspan="1"><p>Page</p></th>
+        <th colspan="1" rowspan="1"><p>Content from the provided copy</p></th>
+        <th colspan="1" rowspan="1"><p>Primary call to action</p></th>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Home</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>
+            Hero (current show), hours today, what's on, featured artwork,
+            upcoming events, membership teaser
+          </p></td
+        >
+        <td colspan="1" rowspan="1"><p>See What's On</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Visit</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>
+            Hours, admission prices, address and map, amenities, accessibility
+          </p></td
+        >
+        <td colspan="1" rowspan="1"><p>Get Tickets</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Exhibitions</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>
+            Light &amp; Shadow, Local Visions, Threads of Memory (Oct 12), The
+            Digital Canvas (Dec 1), past shows
+          </p></td
+        >
+        <td colspan="1" rowspan="1"><p>View Exhibition</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Artist profile (template)</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>Bios: Marquez, Chen, Watanabe, Hall, Ramirez, Nguyen</p></td
+        >
+        <td colspan="1" rowspan="1"><p>See Their Work</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Collection</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>Permanent-collection highlights with medium, date, artist</p></td
+        >
+        <td colspan="1" rowspan="1"><p>Explore the Collection</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Events</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>First Fridays, Artist Talks, Family Sundays, Film Nights</p></td
+        >
+        <td colspan="1" rowspan="1"><p>Add to Calendar</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Learn</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>For Schools, For Adults, For Families</p></td
+        >
+        <td colspan="1" rowspan="1"><p>Book a Field Trip</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Join &amp; Give</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>
+            4 membership levels and benefits, Annual Fund, sponsorships, planned
+            giving, volunteering
+          </p></td
+        >
+        <td colspan="1" rowspan="1"><p>Become a Member</p></td>
+      </tr>
+      <tr>
+        <td height="20" colspan="1" rowspan="1"><p>About</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>
+            Welcome, mission, community, "A Place to Explore," contact email
+          </p></td
+        >
+        <td colspan="1" rowspan="1"><p>&nbsp;</p></td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>Brand direction</h2>
+  <p>
+    Create an original brand for the museum.<br />
+    <strong>Personality:</strong> welcoming, curious, contemporary, community-rooted.
+    Not stuffy, not trendy.<br />
+    <strong>Logo (requirements)</strong>
+  </p>
+  <ul>
+    <li>
+      A wordmark plus a simple mark that works at 32px (favicon) and on a
+      banner.
+    </li>
+    <li>Consider full-color, one-color, and reversed (on dark) versions.</li>
+    <li>Use an SVG in the final design.</li>
+  </ul>
+  <p><strong>Color palette (minimum 5 colors)</strong></p>
+  <p>
+    You will create your own palette. The example below shows the expected
+    format: a role, a name, a hex value and where each color is used.
+  </p>
+  <table>
+    <colgroup>
+      <col />
+      <col />
+      <col />
+      <col />
+    </colgroup>
+    <tbody>
+      <tr>
+        <th colspan="1" rowspan="1"><p>Role</p></th>
+        <th colspan="1" rowspan="1"><p>Example name</p></th>
+        <th colspan="1" rowspan="1"><p>Example hex</p></th>
+        <th colspan="1" rowspan="1"><p>Example use</p></th>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Primary dark</p></td>
+        <td colspan="1" rowspan="1"><p>Midnight indigo</p></td>
+        <td colspan="1" rowspan="1"><p><span style="display: inline-block; padding: 0.15em 0.5em; border-radius: 4px; font-family: monospace; background-color: #1F2340; color: #FFFFFF;">#1F2340</span></p></td>
+        <td colspan="1" rowspan="1"><p>Text, header, footer</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Primary accent</p></td>
+        <td colspan="1" rowspan="1"><p>Dawn coral</p></td>
+        <td colspan="1" rowspan="1"><p><span style="display: inline-block; padding: 0.15em 0.5em; border-radius: 4px; font-family: monospace; background-color: #E8664A; color: #000000;">#E8664A</span></p></td>
+        <td colspan="1" rowspan="1"><p>Buttons, links, highlights</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Secondary accent</p></td>
+        <td colspan="1" rowspan="1"><p>Aurora teal</p></td>
+        <td colspan="1" rowspan="1"><p><span style="display: inline-block; padding: 0.15em 0.5em; border-radius: 4px; font-family: monospace; background-color: #2E9C95; color: #000000;">#2E9C95</span></p></td>
+        <td colspan="1" rowspan="1"><p>Tags, secondary buttons, labels</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Warm light</p></td>
+        <td colspan="1" rowspan="1"><p>Gallery gold</p></td>
+        <td colspan="1" rowspan="1"><p><span style="display: inline-block; padding: 0.15em 0.5em; border-radius: 4px; font-family: monospace; background-color: #F2C14E; color: #000000;">#F2C14E</span></p></td>
+        <td colspan="1" rowspan="1"><p>Small highlights only</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Neutral light</p></td>
+        <td colspan="1" rowspan="1"><p>Gallery white</p></td>
+        <td colspan="1" rowspan="1"><p><span style="display: inline-block; padding: 0.15em 0.5em; border-radius: 4px; font-family: monospace; background-color: #FAF8F4; color: #000000; border: 1px solid #8A8790;">#FAF8F4</span></p></td>
+        <td colspan="1" rowspan="1"><p>Page background</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Neutral mid</p></td>
+        <td colspan="1" rowspan="1"><p>Concrete gray</p></td>
+        <td colspan="1" rowspan="1"><p><span style="display: inline-block; padding: 0.15em 0.5em; border-radius: 4px; font-family: monospace; background-color: #8A8790; color: #000000;">#8A8790</span></p></td>
+        <td colspan="1" rowspan="1"><p>Borders, captions, dividers</p></td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Check each text/background pair in your palette against WCAG AA (4.5:1 body
+    text, 3:1 large text).
+  </p>
+  <p><strong>Typography</strong></p>
+  <ul>
+    <li>
+      One expressive display face for headings and one highly readable text face
+      for body.
+    </li>
+    <li>
+      Define a type scale (e.g., 16 / 20 / 25 / 31 / 39 / 49px) and use it in
+      both Figma and CSS.
+    </li>
+  </ul>
+  <p><strong>Messaging</strong></p>
+  <ul>
+    <li>
+      <strong>Tagline:</strong> write one that captures your brand concept.
+    </li>
+    <li>
+      <strong>Voice:</strong> warm, plain, inviting; short sentences; speak to "you."
+    </li>
+    <li>
+      <strong>Key messages:</strong> art for everyone (kids free, members free);
+      something new every visit; a gathering place for the community.
+    </li>
+    <li>
+      Keep button labels action-led: <em>Plan Your Visit</em>, <em
+        >Get Tickets</em
+      >, <em>Become a Member</em>, <em>See What's On</em>.
+    </li>
+  </ul>
+  <h2>Imagery plan</h2>
+  <p>
+    The artworks and artists in the content are fictional, so every image must
+    be your own or Creative Commons-licensed and stand in convincingly.
+  </p>
+  <table>
+    <colgroup>
+      <col />
+      <col />
+      <col />
+    </colgroup>
+    <tbody>
+      <tr>
+        <th colspan="1" rowspan="1"><p>Need</p></th>
+        <th colspan="1" rowspan="1"><p>Approach</p></th>
+        <th colspan="1" rowspan="1"><p>Notes</p></th>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Collection highlights (7 works)</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>
+            CC0 / public-domain art from museum open-access programs, chosen to
+            match each description
+          </p></td
+        >
+        <td colspan="1" rowspan="1"
+          ><p>e.g., a moody blue abstract for <em>Midnight River</em></p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Artist portraits (6 artists)</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>CC-licensed portraits, or simple illustrated avatars</p></td
+        >
+        <td colspan="1" rowspan="1"
+          ><p>Keep a consistent crop and treatment</p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Building, galleries, café, garden</p></td
+        >
+        <td colspan="1" rowspan="1"
+          ><p>CC-licensed photos, or photograph a local space yourself</p></td
+        >
+        <td colspan="1" rowspan="1"
+          ><p>Light-filled interiors support the brand</p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Events &amp; education</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>Photos of workshops, families, performances</p></td
+        >
+        <td colspan="1" rowspan="1"
+          ><p>Show the community, not just objects</p></td
+        >
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Textures &amp; graphics</p></td>
+        <td colspan="1" rowspan="1"
+          ><p>Your own illustration or photography</p></td
+        >
+        <td colspan="1" rowspan="1"><p>Reinforces your brand concept</p></td>
+      </tr>
+    </tbody>
+  </table>
+  <p><strong>Rules</strong></p>
+  <ul>
+    <li>
+      Track every image in a credits list (title, creator, source URL, license).
+    </li>
+    <li>
+      Apply one consistent treatment (crop ratios, e.g. 4:5 for art, 16:9 for
+      heroes; optional color overlay).
+    </li>
+    <li>
+      Export web-optimized files (WebP or AVIF, under ~300KB) and write alt text
+      for each.
+    </li>
+  </ul>
+  <h2
+    data-lfile-container="84dc4439-15db-42b3-820f-644078f13d26"
+    data-pm-slice="1 1 []"
+  >
+    Design requirements
+  </h2>
+  <p>Final design Figma files should:</p>
+  <ul>
+    <li>
+      <a
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        href="https://help.figma.com/hc/en-us/articles/360038511413-Set-custom-thumbnails-for-files"
+        >Set a custom thumbnail for the file</a
+      >
+    </li>
+    <li>
+      <a
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        href="https://help.figma.com/hc/en-us/articles/360038663154-Create-components-to-reuse-in-designs"
+        >Create components to reuse in designs</a
+      >
+    </li>
+    <li>
+      <a
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        href="https://help.figma.com/hc/en-us/articles/360039957034-Create-and-apply-text-styles"
+        >Create and apply text styles</a
+      >
+    </li>
+    <li>
+      <a
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        href="https://help.figma.com/hc/en-us/articles/360038746534-Create-color-text-effect-and-layout-guide-styles"
+        >Create color, text, effect, and layout guide styles</a
+      >
+    </li>
+    <li>
+      <a
+        target="_blank"
+        rel="noopener noreferrer nofollow"
+        href="https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout"
+        >Use Auto Layout</a
+      >
+    </li>
+  </ul>
+  <h2>UX, responsive &amp; accessibility requirements</h2>
+  <p><strong>Key interface elements</strong></p>
+  <ul>
+    <li>
+      Persistent header: logo, main navigation, a prominent <em>Get Tickets</em>
+      / <em>Plan Your Visit</em> button.
+    </li>
+    <li>
+      Homepage hero featuring the current exhibition, with today's hours visible
+      above the fold.
+    </li>
+    <li>Reusable cards for exhibitions, artworks, artists and events.</li>
+    <li>
+      Footer: address, hours, contact email, newsletter sign-up, social links.
+    </li>
+    <li>Mobile: hamburger or bottom menu; tap targets at least 44×44px.</li>
+  </ul>
+  <p><strong>Responsive frames (Figma and code)</strong></p>
+  <table>
+    <colgroup>
+      <col />
+      <col />
+      <col />
+    </colgroup>
+    <tbody>
+      <tr>
+        <th colspan="1" rowspan="1"><p>Breakpoint</p></th>
+        <th colspan="1" rowspan="1"><p>Width</p></th>
+        <th colspan="1" rowspan="1"><p>Layout</p></th>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Mobile</p></td>
+        <td colspan="1" rowspan="1"><p>320px</p></td>
+        <td colspan="1" rowspan="1"><p>1 column, stacked cards</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Tablet</p></td>
+        <td colspan="1" rowspan="1"><p>768px</p></td>
+        <td colspan="1" rowspan="1"><p>2 columns</p></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="1"><p>Desktop</p></td>
+        <td colspan="1" rowspan="1"><p>1440px</p></td>
+        <td colspan="1" rowspan="1"><p>12-column grid, 3–4 card rows</p></td>
+      </tr>
+    </tbody>
+  </table>
+  <p><strong>Accessibility baseline</strong></p>
+  <ul>
+    <li>Semantic HTML (header, nav, main, footer, headings in order).</li>
+    <li>
+      Alt text for all artwork and photos; describe the art, not just its title.
+    </li>
+    <li>Color contrast at WCAG AA; never use color alone to convey meaning.</li>
+    <li>Visible focus states and full keyboard navigation.</li>
+  </ul>
   <h2>Deadlines and Grading Criteria:</h2>
   <table>
-    <tr>
-      <td>
-        <br />
-        <strong>Description</strong>
-      </td>
-      <td>
-        <p><strong>Due Date</strong></p>
-      </td>
-      <td>
-        <p><strong>Points</strong></p>
-      </td>
-    </tr>
-    <tr>
-      <td><p>Research</p></td>
-      <td><p>11/11</p></td>
-      <td><p>20</p></td>
-    </tr>
-    <tr>
-      <td><p>Sitemap</p></td>
-      <td><p>11/11</p></td>
-      <td><p>20</p></td>
-    </tr>
-    <tr>
-      <td><p>Wireframe</p></td>
-      <td><p>11/16</p></td>
-      <td><p>20</p></td>
-    </tr>
-    <tr>
-      <td><p>Branding</p></td>
-      <td><p>11/18</p></td>
-      <td><p>20</p></td>
-    </tr>
-    <tr>
-      <td><p>Visual Design</p></td>
-      <td><p>11/23</p></td>
-      <td><p>60</p></td>
-    </tr>
-    <tr>
-      <td><p>In-progress HTML template</p></td>
-      <td><p>12/1</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td><p>Development - final site published to GitHub</p></td>
-      <td><p>12/7</p></td>
-      <td><p>100</p></td>
-    </tr>
+    <tbody>
+      <tr>
+        <td
+          ><br />
+          <strong>Description</strong></td
+        >
+        <td><p><strong>Due Date</strong></p></td>
+        <td><p><strong>Points</strong></p></td>
+      </tr>
+      <tr>
+        <td><p>Research</p></td>
+        <td><p>11/11</p></td>
+        <td><p>20</p></td>
+      </tr>
+      <tr>
+        <td><p>Sitemap</p></td>
+        <td><p>11/11</p></td>
+        <td><p>20</p></td>
+      </tr>
+      <tr>
+        <td><p>Wireframe</p></td>
+        <td><p>11/16</p></td>
+        <td><p>20</p></td>
+      </tr>
+      <tr>
+        <td><p>Branding</p></td>
+        <td><p>11/18</p></td>
+        <td><p>20</p></td>
+      </tr>
+      <tr>
+        <td><p>Visual Design</p></td>
+        <td><p>11/23</p></td>
+        <td><p>60</p></td>
+      </tr>
+      <tr>
+        <td><p>In-progress HTML template</p></td>
+        <td><p>12/1</p></td>
+        <td><p>-</p></td>
+      </tr>
+      <tr>
+        <td><p>Development - final site published to GitHub</p></td>
+        <td><p>12/7</p></td>
+        <td><p>100</p></td>
+      </tr>
+    </tbody>
   </table>
 </Layout>
