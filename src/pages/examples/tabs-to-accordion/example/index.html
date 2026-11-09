@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tabs to Accordion</title>
+    <style>
+      :root {
+        --accent: #9e1b31;
+        --text: #1f2330;
+        --muted: #5b6070;
+        --border: #e2e3ea;
+        --bg: #f5f6f9;
+        --surface: #ffffff;
+        --speed: 0.3s;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 48px 16px;
+        font-family:
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          Roboto,
+          sans-serif;
+        line-height: 1.6;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      .demo {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .demo h1 {
+        margin: 0 0 4px;
+        font-size: 1.6rem;
+      }
+      .demo > p {
+        margin: 0 0 24px;
+        color: var(--muted);
+      }
+
+      /* ---------- Shared ---------- */
+      .tabs {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        overflow: hidden;
+      }
+
+      .tabs__content {
+        padding: 24px;
+      }
+      .tabs__content h3 {
+        margin-top: 0;
+      }
+      .tabs__content p:last-child {
+        margin-bottom: 0;
+      }
+
+      .tabs__tab:focus-visible,
+      .tabs__trigger:focus-visible,
+      .tabs__panel:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: -2px;
+      }
+
+      /* ---------- Desktop: tabs ---------- */
+      .tabs__list {
+        display: flex;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .tabs__tab {
+        flex: 1;
+        appearance: none;
+        background: none;
+        border: 0;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -1px;
+        padding: 16px 20px;
+        font: inherit;
+        font-weight: 600;
+        color: var(--muted);
+        cursor: pointer;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .tabs__tab:hover {
+        color: var(--text);
+      }
+      .tabs__tab[aria-selected='true'] {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
+
+      /* Accordion headings exist in the markup but are hidden on desktop */
+      .tabs__heading {
+        display: none;
+        margin: 0;
+      }
+      .tabs__panel[hidden] {
+        display: none;
+      }
+
+      /* ---------- Mobile: accordion (767px and below) ---------- */
+      @media (max-width: 767px) {
+        .tabs__list {
+          display: none;
+        }
+
+        .tabs__heading {
+          display: block;
+          font-size: 1rem;
+        }
+        .tabs__section + .tabs__section {
+          border-top: 1px solid var(--border);
+        }
+
+        .tabs__trigger {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          width: 100%;
+          appearance: none;
+          background: none;
+          border: 0;
+          padding: 16px 20px;
+          font: inherit;
+          font-weight: 600;
+          color: var(--text);
+          text-align: left;
+          cursor: pointer;
+        }
+        .tabs__trigger[aria-expanded='true'] {
+          color: var(--accent);
+        }
+
+        /* Chevron */
+        .tabs__trigger::after {
+          content: '';
+          flex-shrink: 0;
+          width: 8px;
+          height: 8px;
+          border-right: 2px solid currentColor;
+          border-bottom: 2px solid currentColor;
+          transform: translateY(-2px) rotate(45deg);
+          transition: transform var(--speed) ease;
+        }
+        .tabs__trigger[aria-expanded='true']::after {
+          transform: translateY(2px) rotate(-135deg);
+        }
+
+        /* Smooth height animation with the grid 0fr -> 1fr trick */
+        .tabs__panel {
+          display: grid;
+          grid-template-rows: 0fr;
+          transition: grid-template-rows var(--speed) ease;
+        }
+        .tabs__panel.is-open {
+          grid-template-rows: 1fr;
+        }
+        .tabs__panel-inner {
+          min-height: 0;
+          overflow: hidden;
+        }
+        .tabs__content {
+          padding: 0 20px 20px;
+        }
+
+        /* Don't animate while switching between layouts */
+        .tabs.is-switching .tabs__panel,
+        .tabs.is-switching .tabs__trigger::after {
+          transition: none;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .tabs__panel,
+        .tabs__trigger::after {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="demo">
+      <h1>Tabs to Accordion</h1>
+      <p>Resize the window below 767px to switch from tabs to an accordion.</p>
+
+      <!--
+    Markup is written once, as accordion sections. The script builds the
+    tab buttons from the section headings, so content never gets duplicated.
+    Add data-open to a panel to make it the initial selection. A URL hash
+    matching a panel (e.g. #features for #features-panel) overrides it.
+  -->
+      <div class="tabs" data-tabs>
+        <div
+          class="tabs__list"
+          role="tablist"
+          aria-label="Product information"
+        ></div>
+
+        <section class="tabs__section">
+          <h2 class="tabs__heading">
+            <button
+              class="tabs__trigger"
+              id="overview-trigger"
+              aria-controls="overview-panel"
+              type="button"
+            >
+              Overview
+            </button>
+          </h2>
+          <div class="tabs__panel" id="overview-panel" data-open>
+            <div class="tabs__panel-inner">
+              <div class="tabs__content">
+                <h3>Overview</h3>
+                <p>
+                  One set of markup, two layouts. On wide screens the sections
+                  display as tabs; on narrow screens they collapse into an
+                  accordion so nothing gets cramped.
+                </p>
+                <p>
+                  The selected tab and the open accordion item stay in sync when
+                  the layout changes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="tabs__section">
+          <h2 class="tabs__heading">
+            <button
+              class="tabs__trigger"
+              id="features-trigger"
+              aria-controls="features-panel"
+              type="button"
+            >
+              Features
+            </button>
+          </h2>
+          <div class="tabs__panel" id="features-panel">
+            <div class="tabs__panel-inner">
+              <div class="tabs__content">
+                <h3>Features</h3>
+                <ul>
+                  <li>
+                    Correct ARIA roles for each mode (tablist/tab/tabpanel vs.
+                    aria-expanded)
+                  </li>
+                  <li>Arrow keys, Home and End to move between tabs</li>
+                  <li>
+                    Animated accordion using CSS grid, no height measuring
+                  </li>
+                  <li>
+                    Collapsed panels are inert, so keyboard focus skips them
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="tabs__section">
+          <h2 class="tabs__heading">
+            <button
+              class="tabs__trigger"
+              id="faq-trigger"
+              aria-controls="faq-panel"
+              type="button"
+            >
+              FAQ
+            </button>
+          </h2>
+          <div class="tabs__panel" id="faq-panel">
+            <div class="tabs__panel-inner">
+              <div class="tabs__content">
+                <h3>Can more than one accordion item be open?</h3>
+                <p>
+                  Yes. Set <code>data-single</code> on the
+                  <code>.tabs</code> element if you want only one open at a
+                  time.
+                </p>
+                <h3>How do I change the breakpoint?</h3>
+                <p>
+                  Update the value in both the CSS media query and the
+                  <code>data-breakpoint</code> attribute (defaults to 767px).
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      document.querySelectorAll('[data-tabs]').forEach(initTabs);
+
+      function initTabs(root) {
+        const breakpoint = root.dataset.breakpoint || 767;
+        const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
+        const singleOpen = root.hasAttribute('data-single');
+
+        const list = root.querySelector('.tabs__list');
+        const sections = [...root.querySelectorAll('.tabs__section')];
+        const triggers = sections.map((s) => s.querySelector('.tabs__trigger'));
+        const panels = sections.map((s) => s.querySelector('.tabs__panel'));
+
+        // Build tab buttons from the accordion triggers
+        const tabs = triggers.map((trigger, i) => {
+          const tab = document.createElement('button');
+          tab.type = 'button';
+          tab.className = 'tabs__tab';
+          tab.id = `${panels[i].id}-tab`;
+          tab.textContent = trigger.textContent.trim();
+          tab.setAttribute('role', 'tab');
+          tab.setAttribute('aria-controls', panels[i].id);
+          list.appendChild(tab);
+          return tab;
+        });
+
+        // Each panel's URL hash is its id without the "-panel" suffix (#features).
+        // It deliberately doesn't match an element id, so the browser won't jump.
+        const hashes = panels.map((p) => p.id.replace(/-panel$/, ''));
+        const indexFromHash = () =>
+          hashes.indexOf(decodeURIComponent(location.hash.slice(1)));
+
+        function updateHash() {
+          const hash = mq.matches && !open.size ? '' : `#${hashes[active]}`;
+          if (location.hash === hash) return;
+          // replaceState avoids filling the back history with every tab click
+          history.replaceState(
+            null,
+            '',
+            hash || location.pathname + location.search,
+          );
+        }
+
+        // State: one active tab (desktop), a set of open items (mobile).
+        // A matching hash in the URL wins over data-open.
+        const fromHash = indexFromHash();
+        let active =
+          fromHash >= 0
+            ? fromHash
+            : Math.max(
+                0,
+                panels.findIndex((p) => p.hasAttribute('data-open')),
+              );
+        let open = new Set([active]);
+
+        function render() {
+          const isAccordion = mq.matches;
+
+          panels.forEach((panel, i) => {
+            if (isAccordion) {
+              const isOpen = open.has(i);
+              panel.hidden = false;
+              panel.removeAttribute('role');
+              panel.removeAttribute('tabindex');
+              panel.setAttribute('aria-labelledby', triggers[i].id);
+              panel.classList.toggle('is-open', isOpen);
+              panel.inert = !isOpen;
+              triggers[i].setAttribute('aria-expanded', String(isOpen));
+            } else {
+              const isActive = i === active;
+              panel.hidden = !isActive;
+              panel.inert = false;
+              panel.classList.add('is-open');
+              panel.setAttribute('role', 'tabpanel');
+              panel.setAttribute('tabindex', '0');
+              panel.setAttribute('aria-labelledby', tabs[i].id);
+              tabs[i].setAttribute('aria-selected', String(isActive));
+              tabs[i].tabIndex = isActive ? 0 : -1;
+            }
+          });
+        }
+
+        function selectTab(i, focus = false) {
+          active = i;
+          open = new Set([i]);
+          render();
+          updateHash();
+          if (focus) tabs[i].focus();
+        }
+
+        function toggleItem(i) {
+          if (open.has(i)) {
+            open.delete(i);
+            if (active === i && open.size) active = [...open][0];
+          } else {
+            if (singleOpen) open.clear();
+            open.add(i);
+            active = i;
+          }
+          render();
+          updateHash();
+        }
+
+        // Tab clicks + keyboard navigation
+        tabs.forEach((tab, i) => {
+          tab.addEventListener('click', () => selectTab(i));
+          tab.addEventListener('keydown', (e) => {
+            const last = tabs.length - 1;
+            const next = {
+              ArrowRight: i === last ? 0 : i + 1,
+              ArrowLeft: i === 0 ? last : i - 1,
+              Home: 0,
+              End: last,
+            }[e.key];
+            if (next !== undefined) {
+              e.preventDefault();
+              selectTab(next, true);
+            }
+          });
+        });
+
+        // Accordion clicks
+        triggers.forEach((trigger, i) => {
+          trigger.addEventListener('click', () => toggleItem(i));
+        });
+
+        // Re-render when crossing the breakpoint, without animating the switch
+        mq.addEventListener('change', () => {
+          root.classList.add('is-switching');
+          if (mq.matches) open = new Set([active]);
+          render();
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => {
+              root.classList.remove('is-switching');
+            }),
+          );
+        });
+
+        // Follow hash changes from in-page links or edits to the address bar
+        window.addEventListener('hashchange', () => {
+          const i = indexFromHash();
+          if (i >= 0) selectTab(i);
+        });
+
+        render();
+      }
+    </script>
+  </body>
+</html>
